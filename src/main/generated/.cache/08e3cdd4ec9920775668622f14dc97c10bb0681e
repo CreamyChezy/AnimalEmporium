@@ -1,11 +1,11 @@
-// 1.20.2	2025-07-16T07:09:22.5998889	Animal Emporium/Model Definitions
-6f0001c700cfbf1229b01804a6a5595d0e3c4d9e assets\emporium\models\item\worm_stick.json
-ce7d943b007c2af1488b7843fec563581ea7ca3e assets\emporium\models\item\worm_block.json
-b2241f844591102442c3a42685f3255b21c84253 assets\emporium\models\item\worm.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\emporium\models\item\opossum_spawn_egg.json
-4b780166c58295406a8e0ec722448c3a67998cfd assets\emporium\blockstates\worm_block.json
+// 1.20.2	2026-01-14T18:30:27.5615346	Animal Emporium/Model Definitions
 0c348c16ccd0f3721af3f9505ae39d8b9e5223fb assets\emporium\models\item\slop_bucket.json
-ea6a5119c0fbb07e9825d8e960691e2930c2a85d assets\emporium\models\block\worm_block.json
+ce7d943b007c2af1488b7843fec563581ea7ca3e assets\emporium\models\item\worm_block.json
 2447669cb5fa3c8dc77a83a1f4a40fd9b901b732 assets\emporium\models\item\worm_soup.json
-fb6eab7199b523bfcb3b6f50498111d499f7c11f assets\emporium\models\item\pet_bowl.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets\emporium\models\item\opossum_spawn_egg.json
+b2241f844591102442c3a42685f3255b21c84253 assets\emporium\models\item\worm.json
+ea6a5119c0fbb07e9825d8e960691e2930c2a85d assets\emporium\models\block\worm_block.json
+4b780166c58295406a8e0ec722448c3a67998cfd assets\emporium\blockstates\worm_block.json
 1363cbc588151183223fd1d4c6d5161f085bd54b assets\emporium\models\item\golden_worm.json
+6f0001c700cfbf1229b01804a6a5595d0e3c4d9e assets\emporium\models\item\worm_stick.json
+fb6eab7199b523bfcb3b6f50498111d499f7c11f assets\emporium\models\item\pet_bowl.json
