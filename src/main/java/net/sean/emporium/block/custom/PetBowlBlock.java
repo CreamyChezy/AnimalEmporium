@@ -26,7 +26,6 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
     public PetBowlBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(HAS_FOOD, false));
-        // THIS LINE IS CRASHING
     }
 
     @Override
@@ -83,6 +82,7 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
             ItemStack worm = new ItemStack(ModItems.WORM);
 
             if (!player.getInventory().insertStack(worm)) {
+                // Lets worm drop on ground if inventory is full, others can also pick up (no ownership)
                 player.dropItem(worm, false);
             }
 
