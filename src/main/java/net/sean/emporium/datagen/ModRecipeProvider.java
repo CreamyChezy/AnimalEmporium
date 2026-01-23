@@ -44,15 +44,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
                .criterion(hasItem(ModItems.WORM), conditionsFromItem(ModItems.WORM))
                .offerTo(exporter, new Identifier(getRecipeName(ModItems.GOLDEN_WORM) + "shaped"));
-       // WORM SOUP SHAPELESS
+       // WORM SOUP w/ RED MUSHROOM SHAPELESS
        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.WORM_SOUP, 1)
                .input(Items.BOWL)
                .input(ModItems.WORM)
                .input(Items.RED_MUSHROOM)
-               .input(Items.BROWN_MUSHROOM)
                .criterion(hasItem(Items.BOWL), conditionsFromItem(Items.BOWL))
                .criterion(hasItem(ModItems.WORM), conditionsFromItem(ModItems.WORM))
-               .offerTo(exporter, new Identifier(getRecipeName(ModItems.WORM_SOUP) + "shapeless"));
+               .offerTo(exporter, new Identifier(getRecipeName(ModItems.WORM_SOUP) + "shapeless_red"));
+       // WORM SOUP w/ BROWN MUSHROOM SHAPELESS
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.WORM_SOUP, 1)
+                .input(Items.BOWL)
+                .input(ModItems.WORM)
+                .input(Items.BROWN_MUSHROOM)
+                .criterion(hasItem(Items.BOWL), conditionsFromItem(Items.BOWL))
+                .criterion(hasItem(ModItems.WORM), conditionsFromItem(ModItems.WORM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.WORM_SOUP) + "shapeless_brown"));
        // WORM BLOCK SHAPED
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WORM_BLOCK, 1)
                 .pattern("www")
