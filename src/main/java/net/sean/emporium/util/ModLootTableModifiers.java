@@ -1,7 +1,7 @@
 package net.sean.emporium.util;
 
 import io.netty.util.Constant;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
@@ -19,20 +19,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModLootTableModifiers {
-    private static final Identifier GRASS_ID = new Identifier("minecraft","blocks/grass");
+    private static final Identifier GRASS_ID = Identifier.of("minecraft","blocks/grass");
 
     public static void modifyLootTables() {
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if(GRASS_ID.equals(id)){
+        LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
+            if(GRASS_ID.equals(registryKey.getValue())) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(.125f))
                         .with(ItemEntry.builder(ModItems.WORM))
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)).build());
-
-                tableBuilder.pool(poolBuilder.build());
-
-
+                builder.pool(poolBuilder.build());
+            }
+        });
 
        /*   for adding to inventory based loot tables
         LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {
@@ -44,6 +43,6 @@ public class ModLootTableModifiers {
                 return LootTable.builder().pool(pool).build();
             }
             return null; */
-        }});
+
     }
 }

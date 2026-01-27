@@ -1,5 +1,6 @@
 package net.sean.emporium.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -22,10 +23,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final BooleanProperty HAS_FOOD = BooleanProperty.of("has_food");
+    public static final MapCodec<PetBowlBlock> CODEC = PetBowlBlock.createCodec(PetBowlBlock::new);
 
     public PetBowlBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getStateManager().getDefaultState().with(HAS_FOOD, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 
     @Override
@@ -50,17 +57,12 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
-    }
-
-    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(HAS_FOOD);
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack heldStack = player.getStackInHand(hand);
         boolean hasFood = state.get(HAS_FOOD);
 
@@ -71,13 +73,17 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
                 heldStack.decrement(1);
             }
 
-
             world.setBlockState(pos, state.with(PetBowlBlock.HAS_FOOD, true), Block.NOTIFY_ALL);
             return ActionResult.SUCCESS;
         }
+        return ActionResult.PASS;
+    }
 
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        boolean hasFood = state.get(HAS_FOOD);
         // Take worm from bowl
-        if (heldStack.isEmpty() && hasFood) {
+        if (hasFood) {
             world.setBlockState(pos, state.with(HAS_FOOD, false), Block.NOTIFY_ALL);
             ItemStack worm = new ItemStack(ModItems.WORM);
 
@@ -85,10 +91,8 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
                 // Lets worm drop on ground if inventory is full, others can also pick up (no ownership)
                 player.dropItem(worm, false);
             }
-
             return ActionResult.SUCCESS;
         }
-
         return ActionResult.PASS;
     }
 
@@ -98,4 +102,16 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
         return validateTicker(type, ModBlockEntities.PET_BOWL_BE,
                 ((world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1)));
     }
+
+    /*
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        if (world.isClient()) return null; // client-only tick, optional
+        return (world1, pos, state1, blockEntity) -> {
+            if (blockEntity instanceof PetBowlBlockEntity bowl) {
+                bowl.tick(world1, pos, state1);
+            }
+        };
+    }*/
 }

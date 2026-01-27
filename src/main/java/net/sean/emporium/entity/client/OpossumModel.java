@@ -2,41 +2,50 @@ package net.sean.emporium.entity.client;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.sean.emporium.entity.animation.ModAnimations;
 import net.sean.emporium.entity.custom.OpossumEntity;
 
-public class OpossumModel<T extends OpossumEntity> extends SinglePartEntityModel<T> {
+public class OpossumModel extends EntityModel<OpossumRenderState> {
+    private final ModelPart root;
     private final ModelPart opossum;
     private final ModelPart head;
 
+    private final Animation walkingAnimation;
+    //private final Animation idlingAnimation;
+
+
     public OpossumModel(ModelPart root) {
-       this.opossum = root;
-       this.head = opossum.getChild("head");
+       super(root);
+       this.root = root.getChild("root");
+       this.opossum = this.root.getChild("opossum");
+       this.head = this.opossum.getChild("head");
+
+       this.walkingAnimation = ModAnimations.OPOSSUM_WALK.createAnimation(root);
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -5.0F, -3.0F, 8.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 22.0F, 0.0F));
+        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -5.0F, -3.0F, 8.0F, 5.0F, 5.0F, new Dilation(0.0F)), pivotOnly(0.0F, 22.0F, 0.0F));
 
-        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(21, 2).cuboid(-1.0F, 0.0F, -1.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 0.0F, -2.0F));
+        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(21, 2).cuboid(-1.0F, 0.0F, -1.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 0.0F, -2.0F));
 
-        ModelPartData bone2 = body.addChild("bone2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 0.0F, 1.0F));
+        ModelPartData bone2 = body.addChild("bone2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 0.0F, 1.0F));
 
         ModelPartData backlegleft = body.addChild("backlegleft", ModelPartBuilder.create().uv(6, 18).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F))
-                .uv(6, 21).cuboid(-1.0F, 1.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(-3.0F, 0.0F, -2.0F));
+                .uv(6, 21).cuboid(-1.0F, 1.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), pivotOnly(-3.0F, 0.0F, -2.0F));
 
         ModelPartData backlegright = body.addChild("backlegright", ModelPartBuilder.create().uv(0, 3).cuboid(-1.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(17, 16).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(-3.0F, 0.0F, 1.0F));
+                .uv(17, 16).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), pivotOnly(-3.0F, 0.0F, 1.0F));
 
         ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 10).cuboid(0.0F, -2.0F, -1.0F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F))
                 .uv(12, 19).cuboid(1.0F, -3.0F, -2.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(0, 19).cuboid(1.0F, -3.0F, 1.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
-                .uv(19, 10).cuboid(3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 20.0F, -1.0F));
+                .uv(19, 10).cuboid(3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 20.0F, -1.0F));
 
         ModelPartData muzzelr_r1 = head.addChild("muzzelr_r1", ModelPartBuilder.create().uv(0, 16).cuboid(5.5835F, -3.0F, 1.7064F, 3.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-4.0F, 2.0F, 1.0F, 0.0F, 0.3054F, 0.0F));
 
@@ -47,18 +56,16 @@ public class OpossumModel<T extends OpossumEntity> extends SinglePartEntityModel
         ModelPartData tail = modelPartData.addChild("tail", ModelPartBuilder.create().uv(16, 19).cuboid(-3.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(21, 0).cuboid(-2.0F, 0.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(9, 10).cuboid(-6.0F, 2.0F, 0.0F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(19, 14).cuboid(-7.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(-4.0F, 19.0F, -1.0F));
+                .uv(19, 14).cuboid(-7.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F)), pivotOnly(-4.0F, 19.0F, -1.0F));
         return TexturedModelData.of(modelData, 32, 32);
     }
 
     @Override
-    public void setAngles(OpossumEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngles(netHeadYaw, headPitch);
+    public void setAngles(OpossumRenderState state) {
+        super.setAngles(state);
+        this.setHeadAngles(state.relativeHeadYaw, state.pitch);
 
-        this.animateMovement(ModAnimations.OPOSSUM_WALK, limbSwing, limbSwingAmount, 2f, 3f);
-        //this.updateAnimation(entity.idleAnimationState, ModAnimations.OPOSSUM_IDLE, ageInTicks, 1f);
-
+        this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude,2f,3f);
     }
 
     private void setHeadAngles(float headYaw, float headPitch) {
@@ -68,6 +75,7 @@ public class OpossumModel<T extends OpossumEntity> extends SinglePartEntityModel
         this.head.yaw = headYaw * 0.017453292F;
         this.head.pitch = headPitch * 0.017453292F;
     }
+    /*
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         opossum.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
@@ -78,4 +86,10 @@ public class OpossumModel<T extends OpossumEntity> extends SinglePartEntityModel
     public ModelPart getPart() {
         return opossum;
     }
+    */
+
+    public static ModelTransform pivotOnly(float x, float y, float z) {
+        return new ModelTransform(x, y, z, 0f, 0f, 0f,0,0f,0f);
+    }
+
 }

@@ -2,7 +2,7 @@ package net.sean.emporium;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.minecraft.data.client.Model;
+import net.minecraft.client.data.Model;
 import net.minecraft.util.Identifier;
 import net.sean.emporium.datagen.*;
 
@@ -19,7 +19,7 @@ public class AnimalEmporiumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModRecipeProvider::new);
 	}
 	public static Model item(String parent) {
-		return new Model(Optional.of(new Identifier(AnimalEmporium.MOD_ID, "item/" + parent)), Optional.empty());
+		return new Model(Optional.of(Identifier.of(AnimalEmporium.MOD_ID, "item/" + parent)), Optional.empty());
 	}
 
 }

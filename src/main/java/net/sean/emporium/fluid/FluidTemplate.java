@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -26,7 +27,7 @@ public abstract class FluidTemplate extends FlowableFluid {
      * @return whether the fluid is infinite (which means can be infinitely created like water). In vanilla, it depends on the game rule.
      */
     @Override
-    protected boolean isInfinite(World var1) {
+    protected boolean isInfinite(ServerWorld world) {
         return false;
     }
 
@@ -55,10 +56,6 @@ public abstract class FluidTemplate extends FlowableFluid {
      * Possibly related to the distance checks for flowing into nearby holes?
      * Water returns 4. Lava returns 2 in the Overworld and 4 in the Nether.
      */
-    @Override
-    protected int getFlowSpeed(WorldView worldView) {
-        return 4;
-    }
 
     /**
      * Water returns 1. Lava returns 2 in the Overworld and 1 in the Nether.

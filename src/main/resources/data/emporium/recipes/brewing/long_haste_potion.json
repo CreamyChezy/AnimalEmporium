@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:brewing",
+  "ingredient": {
+    "item": "minecraft:redstone"
+  },
+  "input": {
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"emporium:haste_potion\"}"
+  },
+  "output": {
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"emporium:long_haste_potion\"}"
+  }
+}

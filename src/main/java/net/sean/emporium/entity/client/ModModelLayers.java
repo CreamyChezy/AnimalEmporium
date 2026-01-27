@@ -6,5 +6,5 @@ import net.sean.emporium.AnimalEmporium;
 
 public class ModModelLayers {
     public static final EntityModelLayer OPOSSUM =
-            new EntityModelLayer(new Identifier(AnimalEmporium.MOD_ID, "opossum"), "main");
+            new EntityModelLayer(Identifier.of(AnimalEmporium.MOD_ID, "opossum"), "main");
 }

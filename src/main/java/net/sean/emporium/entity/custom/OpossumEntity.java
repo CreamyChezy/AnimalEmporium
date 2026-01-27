@@ -48,13 +48,15 @@ public class OpossumEntity extends TameableEntity {
     @Override
     protected void updateLimbs(float posDelta) {
         float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 0.6f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
+
+        // not sure what any of the floats in this line actually do, so these must be experimented with later
+        this.limbAnimator.updateLimbs(f, 1,0.2f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.getEntityWorld().isClient()) {
             setupAnimationStates();
         }
     }
@@ -65,7 +67,7 @@ public class OpossumEntity extends TameableEntity {
         this.goalSelector.add(1, new SitGoal(this));
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(3, new TemptGoal(this, 1.0, Ingredient.ofItems(ModItems.WORM_STICK), false));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F, false));
+        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.0));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -74,26 +76,20 @@ public class OpossumEntity extends TameableEntity {
 
     public static DefaultAttributeContainer.Builder createOpossumAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 15.0);
+                .add(EntityAttributes.MAX_HEALTH, 10.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.FOLLOW_RANGE, 15.0);
     }
 
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.OPOSSUM.create(world);
+        return ModEntities.OPOSSUM.create(world, SpawnReason.BREEDING);
     }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(ModItems.WORM);
-    }
-
-
-    @Override
-    public EntityView method_48926() {
-        return super.getWorld();
     }
 
     @Nullable
@@ -103,8 +99,8 @@ public class OpossumEntity extends TameableEntity {
     }
 
     @Override
-    public void setTamed(boolean tamed) {
-        super.setTamed(tamed);
+    public void setTamed(boolean tamed, boolean updateAttributes) {
+        super.setTamed(tamed, updateAttributes);
         if (tamed) {
             this.setHealth(20.0F);
         }
@@ -134,18 +130,19 @@ public class OpossumEntity extends TameableEntity {
 
         if (!this.isTamed() && item == ModItems.WORM_STICK) {
             if (!player.getAbilities().creativeMode) {
-                player.getStackInHand(hand).damage(1, player, playerEntity -> playerEntity.sendToolBreakStatus(hand));
+                // make sure this still works without the lambda
+                player.getStackInHand(hand).damage(1, player);
             }
             if (this.random.nextInt(Math.max(1, 6)) == 0) {
                 this.setOwner(player);
                 this.navigation.stop();
                 this.setSitting(false);
                 this.setTarget(null);
-                this.getWorld().sendEntityStatus(this, (byte) 7);
+                this.getEntityWorld().sendEntityStatus(this, (byte) 7);
                 return ActionResult.SUCCESS;
             } else {
                 for (int i = 0; i < 7; ++i) {
-                    this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
+                    this.getEntityWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
                 }
             }
         }

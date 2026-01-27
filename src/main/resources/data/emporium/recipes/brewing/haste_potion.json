@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "ingredient": { "item": "emporium:golden_worm" },
+  "input": {
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"minecraft:awkward\"}"
+  },
+  "output": {
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"emporium:haste_potion\"}"
+  }
+}

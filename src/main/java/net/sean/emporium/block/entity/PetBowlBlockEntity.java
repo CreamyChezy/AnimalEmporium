@@ -22,11 +22,6 @@ public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-
-    }
-
-    @Override
     public Text getDisplayName() {
         return null;
     }
@@ -47,6 +42,9 @@ public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHan
             return;
         }
 
-
+    }
+    @Override
+    public Object getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+        return serverPlayerEntity;
     }
 }

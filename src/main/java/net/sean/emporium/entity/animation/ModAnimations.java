@@ -1,12 +1,9 @@
 package net.sean.emporium.entity.animation;
 
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationHelper;
-import net.minecraft.client.render.entity.animation.Keyframe;
-import net.minecraft.client.render.entity.animation.Transformation;
+import net.minecraft.client.render.entity.animation.*;
 
 public class ModAnimations {
-        public static final Animation OPOSSUM_WALK = Animation.Builder.create(0.0675F).looping()
+        public static final AnimationDefinition OPOSSUM_WALK = AnimationDefinition.Builder.create(0.0675F).looping()
                 .addBoneAnimation("tail", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.027F, AnimationHelper.createRotationalVector(0.0F, 20.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -14,14 +11,14 @@ public class ModAnimations {
                         new Keyframe(0.054F, AnimationHelper.createRotationalVector(0.0F, -20.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.054F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
-                .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+                .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                         new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.027F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.027F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.054F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.054F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.LINEAR)
                 ))
-                .addBoneAnimation("body", new Transformation(Transformation.Targets.TRANSLATE,
+                .addBoneAnimation("body", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                         new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.027F, AnimationHelper.createTranslationalVector(0.0F, -0.25F, 0.0F), Transformation.Interpolations.LINEAR),
                         new Keyframe(0.027F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),

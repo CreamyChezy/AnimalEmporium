@@ -17,19 +17,7 @@ public class SlopFluidBlock extends FluidBlock {
         super(fluid, settings);
     }
 
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-
-        if(entity instanceof LivingEntity){
-            LivingEntity livingEntity = (LivingEntity) entity;
-
-            if (isEntityInFluid(livingEntity, world, pos)){
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 0, false, true));
-            }
-        }
-    }
-
+    // not needed anymore since checking for entity in fluid moved to classes that extend FlowableFluid
     private boolean isEntityInFluid(LivingEntity entity, World world, BlockPos pos){
         VoxelShape blockShape = VoxelShapes.cuboid(
                 pos.getX(), pos.getY(), pos.getZ(),
