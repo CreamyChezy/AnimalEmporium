@@ -38,7 +38,7 @@ public class AnimalEmporium implements ModInitializer {
 	- if opossum is hurt, grab food from bowl otherwise opossum can just randomly eat without actually taking a worm
 	- fix and add more animations
 	- somehow fix stupid shadow/hitbox offset
-	- implement new inventory texture, figure out if adding colors to bowl is easy with datagen otherwise do that like very very very last thing ever
+	- implement new inventory texture
 	- baby opossums able to spawn riding parent? -> when baby grows it should fall off parent automatically
 	 */
 

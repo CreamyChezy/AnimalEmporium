@@ -17,7 +17,7 @@ import net.sean.emporium.block.custom.PetBowlBlock;
 public class ModBlocks {
 
     public static final Block PET_BOWL = registerBlock("pet_bowl",
-            new PetBowlBlock(AbstractBlock.Settings.create()
+            new PetBowlBlock(Block.Settings.create()
                     .mapColor(MapColor.WHITE_GRAY)
                     .sounds(BlockSoundGroup.METAL)
                     .strength(2.0F,6.0F)
@@ -25,7 +25,7 @@ public class ModBlocks {
                     .pistonBehavior(PistonBehavior.DESTROY)));
 
     public static final Block WORM_BLOCK = registerBlock("worm_block",
-            new Block(AbstractBlock.Settings.copy(Blocks.HAY_BLOCK).sounds(BlockSoundGroup.SLIME)));
+            new Block(Block.Settings.copy(Blocks.HAY_BLOCK).sounds(BlockSoundGroup.SLIME)));
 
     private static Block registerBlock(String name, Block block){
         registerBlockItem(name, block);
@@ -40,7 +40,5 @@ public class ModBlocks {
     public static void registerModBlocks(){
         AnimalEmporium.LOGGER.info("Registering ModBlocks for " + AnimalEmporium.MOD_ID);
     }
-
-
 
 }

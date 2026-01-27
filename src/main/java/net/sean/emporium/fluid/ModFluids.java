@@ -21,7 +21,7 @@ public class ModFluids {
     });
     public static FlowableFluid FLOWING_SLOP = Registry.register(Registries.FLUID, Identifier.of(AnimalEmporium.MOD_ID, "flowing_slop"), new SlopFluid.Flowing());
     public static Block SLOP = Registry.register(Registries.BLOCK, Identifier.of(AnimalEmporium.MOD_ID, "slop"), new SlopFluidBlock(STILL_SLOP,
-            AbstractBlock.Settings.copy(Blocks.WATER))
+            Block.Settings.copy(Blocks.WATER))
     );
 
         public static void registerModFluids() {

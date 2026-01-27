@@ -45,6 +45,6 @@ public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
     @Override
     public Object getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
-        return serverPlayerEntity;
+        return null;
     }
 }
