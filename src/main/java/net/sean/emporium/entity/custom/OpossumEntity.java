@@ -78,7 +78,8 @@ public class OpossumEntity extends TameableEntity {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.MAX_HEALTH, 10.0)
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.FOLLOW_RANGE, 15.0);
+                .add(EntityAttributes.FOLLOW_RANGE, 15.0)
+                .add(EntityAttributes.TEMPT_RANGE,10.0);
     }
 
     @Nullable

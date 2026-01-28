@@ -4,28 +4,29 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.entity.animation.ModAnimations;
 import net.sean.emporium.entity.custom.OpossumEntity;
 
 public class OpossumModel extends EntityModel<OpossumRenderState> {
-    private final ModelPart root;
-    private final ModelPart opossum;
+    private final ModelPart body;
     private final ModelPart head;
 
     private final Animation walkingAnimation;
     //private final Animation idlingAnimation;
 
 
-    public OpossumModel(ModelPart root) {
-       super(root);
-       this.root = root.getChild("root");
-       this.opossum = this.root.getChild("opossum");
-       this.head = this.opossum.getChild("head");
+    public OpossumModel(ModelPart body) {
+       super(body);
+       this.body = body.getChild("body");
+       this.head = this.body.getChild("head");
 
-       this.walkingAnimation = ModAnimations.OPOSSUM_WALK.createAnimation(root);
+       this.walkingAnimation = ModAnimations.OPOSSUM_WALK.createAnimation(body);
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
@@ -42,7 +43,7 @@ public class OpossumModel extends EntityModel<OpossumRenderState> {
         ModelPartData backlegright = body.addChild("backlegright", ModelPartBuilder.create().uv(0, 3).cuboid(-1.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(17, 16).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), pivotOnly(-3.0F, 0.0F, 1.0F));
 
-        ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 10).cuboid(0.0F, -2.0F, -1.0F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F))
+        ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(0, 10).cuboid(0.0F, -2.0F, -1.0F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F))
                 .uv(12, 19).cuboid(1.0F, -3.0F, -2.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(0, 19).cuboid(1.0F, -3.0F, 1.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(19, 10).cuboid(3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 20.0F, -1.0F));

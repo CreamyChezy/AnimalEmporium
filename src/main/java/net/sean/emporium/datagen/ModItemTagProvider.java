@@ -15,4 +15,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup arg) {
 
     }
+
+    @Override
+    public String getName() {
+        return "AnimalEmporium ModItemTagProvider";
+    }
 }

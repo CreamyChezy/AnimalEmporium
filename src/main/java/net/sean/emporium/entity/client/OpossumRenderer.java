@@ -47,4 +47,12 @@ public class OpossumRenderer extends MobEntityRenderer<OpossumEntity, OpossumRen
     public Identifier getTexture(OpossumRenderState state) {
         return TEXTURE;
     }
+/*
+    @Override
+    public void updateRenderState(OpossumEntity livingEntity, OpossumRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+    }
+
+ */
 }

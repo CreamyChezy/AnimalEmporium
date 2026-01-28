@@ -91,6 +91,6 @@ public class ModRecipeProvider extends RecipeGenerator.RecipeProvider {
 
     @Override
     public String getName() {
-        return "AnimalEmporium Recipes";
+        return "AnimalEmporium ModRecipeProvider";
     }
 }

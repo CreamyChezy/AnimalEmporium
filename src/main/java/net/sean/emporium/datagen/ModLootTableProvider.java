@@ -33,4 +33,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                                 .conditionally(BlockStatePropertyLootCondition.builder(ModBlocks.PET_BOWL)
                                         .properties(StatePredicate.Builder.create().exactMatch(PetBowlBlock.HAS_FOOD, true))))));
     }
+
+    @Override
+    public String getName() {
+       return "AnimalEmporium ModLootTableProvider";
+    }
 }

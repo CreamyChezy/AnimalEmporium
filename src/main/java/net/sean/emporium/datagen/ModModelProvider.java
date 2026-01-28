@@ -26,7 +26,6 @@ public class ModModelProvider extends FabricModelProvider {
        blockStateModelGenerator.registerParentedItemModel(ModBlocks.PET_BOWL, bowlID);
     }
 
-
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.WORM, Models.GENERATED);
@@ -35,5 +34,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.OPOSSUM_SPAWN_EGG, new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
         itemModelGenerator.register(ModItems.GOLDEN_WORM, Models.GENERATED);
         itemModelGenerator.register(ModItems.WORM_SOUP, Models.GENERATED);
+    }
+
+    @Override
+    public String getName() {
+        return "AnimalEmporium ModModelProvider";
     }
 }

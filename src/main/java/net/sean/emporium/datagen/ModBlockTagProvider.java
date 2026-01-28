@@ -15,9 +15,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider{
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup arg) {
+    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.PET_BOWL);
 
+    }
+
+    @Override
+    public String getName() {
+        return "AnimalEmporium ModBlockTagProvider";
     }
 }
