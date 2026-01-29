@@ -15,9 +15,11 @@ public class AnimalEmporiumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModBlockTagProvider::new);
 		pack.addProvider(ModItemTagProvider::new);
 		pack.addProvider(ModLootTableProvider::new);
+		// ModModelProvier is crashing datagen... why?!
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
 	}
+
 	public static Model item(String parent) {
 		return new Model(Optional.of(Identifier.of(AnimalEmporium.MOD_ID, "item/" + parent)), Optional.empty());
 	}

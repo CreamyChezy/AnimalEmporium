@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
+import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.block.ModBlocks;
 import net.sean.emporium.item.ModItems;
 
@@ -54,7 +55,7 @@ public class ModRecipeProvider extends RecipeGenerator.RecipeProvider {
                         .input(Items.RED_MUSHROOM)
                         .criterion(hasItem(Items.BOWL), conditionsFromItem(Items.BOWL))
                         .criterion(hasItem(ModItems.WORM), conditionsFromItem(ModItems.WORM))
-                        .offerTo(exporter);
+                        .offerTo(exporter, String.valueOf(Identifier.of(AnimalEmporium.MOD_ID, "worm_soup_brown")));
                 // WORM SOUP w/ BROWN MUSHROOM SHAPELESS
                 createShapeless(RecipeCategory.FOOD, ModItems.WORM_SOUP, 1)
                         .input(Items.BOWL)
@@ -62,7 +63,7 @@ public class ModRecipeProvider extends RecipeGenerator.RecipeProvider {
                         .input(Items.BROWN_MUSHROOM)
                         .criterion(hasItem(Items.BOWL), conditionsFromItem(Items.BOWL))
                         .criterion(hasItem(ModItems.WORM), conditionsFromItem(ModItems.WORM))
-                        .offerTo(exporter);
+                        .offerTo(exporter, String.valueOf(Identifier.of(AnimalEmporium.MOD_ID, "worm_soup_red")));
                 // WORM BLOCK SHAPED
                 createShaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WORM_BLOCK, 1)
                         .pattern("www")
