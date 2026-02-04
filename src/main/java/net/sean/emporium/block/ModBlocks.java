@@ -38,7 +38,8 @@ public class ModBlocks {
 
     private static Item registerBlockItem(String name, Block block){
         return Registry.register(Registries.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name),
-                new BlockItem(block, new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name)))));
+                new BlockItem(block, new Item.Settings().useBlockPrefixedTranslationKey()
+                        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name)))));
     }
 
     public static void registerModBlocks(){
