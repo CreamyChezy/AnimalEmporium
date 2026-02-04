@@ -19,7 +19,10 @@ repositories {
 }
 
 fabricApi {
-	configureDataGeneration()
+	configureDataGeneration() {
+		client = true
+		modId = "emporium"
+	}
 }
 
 dependencies {
