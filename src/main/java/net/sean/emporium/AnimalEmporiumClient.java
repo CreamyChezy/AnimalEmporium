@@ -13,7 +13,6 @@ import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.sean.emporium.entity.ModEntities;
-import net.sean.emporium.entity.client.ModModelLayers;
 import net.sean.emporium.entity.client.OpossumModel;
 import net.sean.emporium.entity.client.OpossumRenderer;
 import net.sean.emporium.fluid.ModFluids;
@@ -31,6 +30,6 @@ public class AnimalEmporiumClient implements ClientModInitializer {
         BlockRenderLayerMap.putFluids(BlockRenderLayer.SOLID, ModFluids.STILL_SLOP, ModFluids.FLOWING_SLOP);
 
         EntityRendererRegistry.register(ModEntities.OPOSSUM, OpossumRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.OPOSSUM, OpossumModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(OpossumModel.OPOSSUM, OpossumModel::getTexturedModelData);
     }
 }

@@ -19,7 +19,7 @@ public class OpossumRenderer extends MobEntityRenderer<OpossumEntity, OpossumRen
     private static final Identifier TEXTURE = Identifier.of(AnimalEmporium.MOD_ID, "textures/entity/opossum.png");
 
     public OpossumRenderer(EntityRendererFactory.Context context) {
-        super(context, new OpossumModel(context.getPart(ModModelLayers.OPOSSUM)), 0.425f);
+        super(context, new OpossumModel(context.getPart(OpossumModel.OPOSSUM)), 0.425f);
     }
 
     @Override
