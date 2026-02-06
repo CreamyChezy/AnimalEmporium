@@ -20,4 +20,8 @@ public class ModEntities {
             Identifier.of(AnimalEmporium.MOD_ID, "opossum"),
             EntityType.Builder.create(OpossumEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.5f,0.5f).build(OPOSSUM_KEY));
+
+    public static void registerModEntities() {
+        AnimalEmporium.LOGGER.info("Registering Mod Entities for " + AnimalEmporium.MOD_ID);
+    }
 }

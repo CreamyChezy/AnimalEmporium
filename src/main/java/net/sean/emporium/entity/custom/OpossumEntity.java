@@ -6,7 +6,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,14 +15,10 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.sean.emporium.entity.ModEntities;
 import net.sean.emporium.item.ModItems;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.UUID;
 
 public class OpossumEntity extends TameableEntity {
 
@@ -131,20 +126,21 @@ public class OpossumEntity extends TameableEntity {
 
         if (!this.isTamed() && item == ModItems.WORM_STICK) {
             if (!player.getAbilities().creativeMode) {
-                // make sure this still works without the lambda
                 player.getStackInHand(hand).damage(1, player);
             }
-            if (this.random.nextInt(Math.max(1, 6)) == 0) {
+            if (this.random.nextInt(6) == 0) {
                 this.setOwner(player);
                 this.navigation.stop();
                 this.setSitting(false);
                 this.setTarget(null);
                 this.getEntityWorld().sendEntityStatus(this, (byte) 7);
+                this.setTamed(true,true);
                 return ActionResult.SUCCESS;
             } else {
                 for (int i = 0; i < 7; ++i) {
                     this.getEntityWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
                 }
+                return ActionResult.SUCCESS;
             }
         }
             if (this.isOwner(player) && (item != ModItems.WORM_STICK && item != ModItems.WORM)) {

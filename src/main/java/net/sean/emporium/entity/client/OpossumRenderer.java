@@ -1,16 +1,12 @@
 package net.sean.emporium.entity.client;
 
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
 import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.entity.custom.OpossumEntity;
 
@@ -47,12 +43,12 @@ public class OpossumRenderer extends MobEntityRenderer<OpossumEntity, OpossumRen
     public Identifier getTexture(OpossumRenderState state) {
         return TEXTURE;
     }
-/*
+
     @Override
     public void updateRenderState(OpossumEntity livingEntity, OpossumRenderState livingEntityRenderState, float f) {
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
-        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        //livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
     }
 
- */
+
 }

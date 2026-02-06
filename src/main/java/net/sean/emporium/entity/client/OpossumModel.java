@@ -1,19 +1,13 @@
 package net.sean.emporium.entity.client;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.entity.animation.ModAnimations;
-import net.sean.emporium.entity.custom.OpossumEntity;
-import org.jspecify.annotations.Nullable;
 
 public class OpossumModel extends EntityModel<OpossumRenderState> {
     public static final EntityModelLayer OPOSSUM = new EntityModelLayer(Identifier.of(AnimalEmporium.MOD_ID,"opossum"),"main");
@@ -81,7 +75,7 @@ public class OpossumModel extends EntityModel<OpossumRenderState> {
     }
 
     public static ModelTransform pivotOnly(float x, float y, float z) {
-        return new ModelTransform(x, y, z, 0f, 0f, 0f,0,0f,0f);
+        return new ModelTransform(x, y, z, 0f, 0f, 0f,1f,1f,1f);
     }
 
 }

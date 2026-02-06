@@ -28,6 +28,7 @@ public class AnimalEmporium implements ModInitializer {
 		ModBlockEntities.registerModBE();
 		ModLootTableModifiers.modifyLootTables();
 		ModPotions.registerPotions();
+		ModEntities.registerModEntities();
 		ModWorldGen.generateWorldGen();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.OPOSSUM, OpossumEntity.createOpossumAttributes());
