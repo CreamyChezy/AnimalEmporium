@@ -66,6 +66,10 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
         ItemStack heldStack = player.getStackInHand(hand);
         boolean hasFood = state.get(HAS_FOOD);
 
+        // Runs onUse() if hasFood = true no matter what
+        if (hasFood){
+            return onUse(state, world, pos, player, hit);
+        }
         // Add worm to bowl
         if (!hasFood && heldStack.getItem() == ModItems.WORM) {
 
@@ -82,6 +86,7 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         boolean hasFood = state.get(HAS_FOOD);
+
         // Take worm from bowl
         if (hasFood) {
             world.setBlockState(pos, state.with(HAS_FOOD, false), Block.NOTIFY_ALL);
@@ -96,14 +101,21 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
         return ActionResult.PASS;
     }
 
-    @Nullable
+   /* @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.PET_BOWL_BE,
                 ((world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1)));
     }
 
-    /*
+    */
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        return super.onBreak(world, pos, state, player);
+    }
+
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
@@ -113,5 +125,5 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
                 bowl.tick(world1, pos, state1);
             }
         };
-    }*/
+    }
 }

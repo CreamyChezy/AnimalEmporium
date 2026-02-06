@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory {
     public PetBowlBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PET_BOWL_BE, pos, state);
     }
@@ -32,14 +32,9 @@ public class PetBowlBlockEntity extends BlockEntity implements ExtendedScreenHan
         return null;
     }
 
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return null;
-    }
-
     public void tick(World world, BlockPos pos, BlockState state) {
         if(world.isClient()){
-            return;
+
         }
 
     }
