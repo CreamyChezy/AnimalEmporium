@@ -51,8 +51,8 @@ public abstract class SlopFluid extends FluidTemplate {
     protected void onEntityCollision(World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         super.onEntityCollision(world, pos, entity, handler);
 
-        if(world.isClient() && entity instanceof LivingEntity living){
-            living.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 0, false, true));
+        if(entity instanceof LivingEntity living){
+            living.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1, true, true));
         }
     }
 
