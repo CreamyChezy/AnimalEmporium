@@ -40,8 +40,8 @@ public class AnimalEmporium implements ModInitializer {
 	- fix and add more animations
 	- somehow fix stupid shadow/hitbox offset
 	- implement new inventory texture
-	- baby opossums able to spawn riding parent? -> when baby grows it should fall off parent automatically
-	 */
+
+	*/
 
 
 
