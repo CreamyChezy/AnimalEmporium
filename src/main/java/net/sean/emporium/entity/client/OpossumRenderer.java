@@ -30,7 +30,7 @@ public class OpossumRenderer extends MobEntityRenderer<OpossumEntity, OpossumRen
         matrixStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(90));
 
         if(state.baby) {
-            matrixStack.scale(0.8f,0.8f,0.8f);
+            matrixStack.scale(0.7f,0.7f,0.7f);
         }
         else{
             matrixStack.scale(1.5f,1.5f,1.5f);
