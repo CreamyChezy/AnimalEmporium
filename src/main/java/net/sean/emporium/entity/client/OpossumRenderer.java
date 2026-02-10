@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.entity.custom.OpossumEntity;
@@ -48,7 +49,22 @@ public class OpossumRenderer extends MobEntityRenderer<OpossumEntity, OpossumRen
     public void updateRenderState(OpossumEntity livingEntity, OpossumRenderState livingEntityRenderState, float f) {
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
         //livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+
+        // Tracks death animation progress
+        livingEntityRenderState.deathProgress = livingEntity.deathTime > 0
+                ? MathHelper.clamp(((float) livingEntity.deathTime + f - 1.0F) / 20.0F * 1.6F, 0.0F, 1.0F)
+                : 0.0F;
     }
 
+    @Override
+    protected void setupTransforms(OpossumRenderState state, MatrixStack matrices, float bodyYaw, float baseHeight) {
+        super.setupTransforms(state, matrices, bodyYaw, baseHeight);
 
+        // Manual fix for death animation due to opossum model being rotated 90 degrees
+        if (state.deathProgress > 0.0F) {
+            float angle = MathHelper.sqrt(state.deathProgress) * 90.0F;
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-angle));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(angle));
+        }
+    }
 }

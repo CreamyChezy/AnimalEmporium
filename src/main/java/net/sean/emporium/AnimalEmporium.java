@@ -40,7 +40,7 @@ public class AnimalEmporium implements ModInitializer {
 	- fix and add more animations
 	- somehow fix stupid shadow/hitbox offset
 	- implement new inventory texture
-
+	- add a goal for baby opossum to ride/get off parent
 	*/
 
 

@@ -5,4 +5,5 @@ import net.minecraft.entity.AnimationState;
 
 public class OpossumRenderState extends LivingEntityRenderState {
     public final AnimationState idleAnimationState = new AnimationState();
+    public float deathProgress;
 }
