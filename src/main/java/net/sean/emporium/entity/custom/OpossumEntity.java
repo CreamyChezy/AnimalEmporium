@@ -23,10 +23,14 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.sean.emporium.entity.ModEntities;
+import net.sean.emporium.entity.ai.DismountParentGoal;
 import net.sean.emporium.entity.ai.EatFromBowlGoal;
+import net.sean.emporium.entity.ai.MountParentGoal;
+import net.sean.emporium.entity.ai.OpossumPanicGoal;
 import net.sean.emporium.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OpossumEntity extends TameableEntity {
@@ -34,6 +38,7 @@ public class OpossumEntity extends TameableEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     private boolean hasAttemptedInitialMount = false;
+    private int mountCooldown = 0;
 
     public OpossumEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -47,6 +52,14 @@ public class OpossumEntity extends TameableEntity {
         else {
             --this.idleAnimationTimeout;
         }
+    }
+
+    public void setMountCooldown(int ticks){
+        this.mountCooldown = ticks;
+    }
+
+    public int getMountCooldown() {
+        return this.mountCooldown;
     }
 
     @Override
@@ -151,20 +164,27 @@ public class OpossumEntity extends TameableEntity {
             }
             hasAttemptedInitialMount = true;
         }
+
+        if (this.mountCooldown > 0) {
+            this.mountCooldown--;
+        }
     }
 
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new SitGoal(this));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
-        this.goalSelector.add(3, new TemptGoal(this, 1.0, Ingredient.ofItems(ModItems.WORM_STICK), false));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 10.0F, 2.0F));
-        this.goalSelector.add(5, new EatFromBowlGoal(this, 1.0, 10));
-        this.goalSelector.add(6, new FollowParentGoal(this, 1.0));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.add(2, new OpossumPanicGoal(this, 1.5D));
+        this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.ofItems(ModItems.WORM_STICK), false));
+        this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.add(6, new EatFromBowlGoal(this, 1.0D, 10));
+        this.goalSelector.add(7, new FollowParentGoal(this, 1.0D));
+        this.goalSelector.add(7, new MountParentGoal(this, 1.0D));
+        this.goalSelector.add(7, new DismountParentGoal(this));
+        this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(9, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(9, new LookAroundGoal(this));
     }
 
     public static DefaultAttributeContainer.Builder createOpossumAttributes() {
@@ -186,23 +206,12 @@ public class OpossumEntity extends TameableEntity {
         return stack.isOf(ModItems.WORM);
     }
 
-    @Nullable
-    @Override
-    public LivingEntity getOwner() {
-        return super.getOwner();
-    }
-
     @Override
     public void setTamed(boolean tamed, boolean updateAttributes) {
         super.setTamed(tamed, updateAttributes);
         if (tamed) {
             this.setHealth(20.0F);
         }
-    }
-
-    @Override
-    public boolean isTamed() {
-        return super.isTamed();
     }
 
     @Override
@@ -248,7 +257,7 @@ public class OpossumEntity extends TameableEntity {
             this.setTarget(null);
                 return ActionResult.SUCCESS;
         } else {
-                return ActionResult.FAIL;
+                return ActionResult.PASS;
             }
     }
 
@@ -265,6 +274,27 @@ public class OpossumEntity extends TameableEntity {
             // Passenger babies fall off adult when growing up
             if (vehicle instanceof OpossumEntity) {
                 this.stopRiding();
+            }
+        }
+    }
+
+    // This method just doesn't work
+    @Override
+    public void onDamaged(DamageSource damageSource) {
+        super.onDamaged(damageSource);
+
+        if (!this.getEntityWorld().isClient() && this.hasPassengers()) {
+            List<Entity> passengers = this.getPassengerList();
+
+            for (Entity passenger : passengers) {
+                if (passenger instanceof OpossumEntity baby && baby.isBaby()) {
+                    baby.stopRiding();
+                    double xDir = (this.random.nextDouble() - 0.5) * 0.4;
+                    double zDir = (this.random.nextDouble() - 0.5) * 0.4;
+                    baby.setVelocity(xDir, 0.3, zDir);
+                    baby.velocityDirty = true;
+                    baby.setMountCooldown(100);
+                }
             }
         }
     }

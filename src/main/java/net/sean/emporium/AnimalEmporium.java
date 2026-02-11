@@ -36,11 +36,9 @@ public class AnimalEmporium implements ModInitializer {
 
 	/*
 	TODO
-	- if opossum is hurt, grab food from bowl otherwise opossum can just randomly eat without actually taking a worm
-	- fix and add more animations
-	- somehow fix stupid shadow/hitbox offset
-	- implement new inventory texture
-	- add a goal for baby opossum to ride/get off parent
+		- fix and add more animations
+		- somehow fix stupid shadow/hitbox offset
+		- implement new inventory texture
 	*/
 
 

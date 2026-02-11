@@ -27,7 +27,7 @@ public class EatFromBowlGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        if (this.opossum.hasVehicle()) return false;
+        if (this.opossum.hasVehicle() || this.opossum.getHealth() == this.opossum.getMaxHealth()) return false;
         return super.canStart();
     }
 
