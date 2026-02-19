@@ -1,9 +1,7 @@
 package net.sean.emporium.fluid;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -26,6 +24,6 @@ public class ModFluids {
             Block.Settings.copy(Blocks.WATER).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(AnimalEmporium.MOD_ID,"slop")))));
 
         public static void registerModFluids() {
-            AnimalEmporium.LOGGER.info("Registering fluids for " + AnimalEmporium.MOD_ID);
+            AnimalEmporium.LOGGER.info("Registering ModFluids for " + AnimalEmporium.MOD_ID);
         }
     }

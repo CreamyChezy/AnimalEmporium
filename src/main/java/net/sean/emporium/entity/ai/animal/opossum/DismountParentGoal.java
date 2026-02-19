@@ -1,4 +1,4 @@
-package net.sean.emporium.entity.ai;
+package net.sean.emporium.entity.ai.animal.opossum;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -28,7 +28,7 @@ public class DismountParentGoal extends Goal {
         this.baby.stopRiding();
         this.baby.addVelocity(
                 (this.baby.getRandom().nextDouble() - 0.5) * 0.2,
-                0.2,
+                0.1,
                 (this.baby.getRandom().nextDouble() - 0.5) * 0.2
         );
 

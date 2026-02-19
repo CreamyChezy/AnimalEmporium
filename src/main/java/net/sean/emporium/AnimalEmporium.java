@@ -6,6 +6,7 @@ import net.sean.emporium.block.ModBlocks;
 import net.sean.emporium.block.entity.ModBlockEntities;
 import net.sean.emporium.entity.ModEntities;
 import net.sean.emporium.entity.custom.OpossumEntity;
+import net.sean.emporium.entity.custom.RatEntity;
 import net.sean.emporium.fluid.ModFluids;
 import net.sean.emporium.item.ModItems;
 import net.sean.emporium.potion.ModPotions;
@@ -19,7 +20,6 @@ public class AnimalEmporium implements ModInitializer {
 	public static final String MOD_ID = "emporium";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-
 	@Override
 	public void onInitialize() {
 		ModFluids.registerModFluids();
@@ -32,6 +32,7 @@ public class AnimalEmporium implements ModInitializer {
 		ModWorldGen.generateWorldGen();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.OPOSSUM, OpossumEntity.createOpossumAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.RAT, RatEntity.createRatAttributes());
 	}
 
 	/*

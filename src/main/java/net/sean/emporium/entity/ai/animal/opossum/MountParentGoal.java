@@ -1,4 +1,4 @@
-package net.sean.emporium.entity.ai;
+package net.sean.emporium.entity.ai.animal.opossum;
 
 import net.minecraft.entity.ai.goal.Goal;
 import net.sean.emporium.entity.custom.OpossumEntity;

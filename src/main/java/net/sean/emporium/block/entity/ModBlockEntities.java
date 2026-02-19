@@ -17,6 +17,6 @@ public class ModBlockEntities {
             FabricBlockEntityTypeBuilder.create(PetBowlBlockEntity::new, ModBlocks.PET_BOWL).build());
 
     public static void registerModBE() {
-        AnimalEmporium.LOGGER.info("Registering Block Entities for " + AnimalEmporium.MOD_ID);
+        AnimalEmporium.LOGGER.info("Registering ModBlockEntities for " + AnimalEmporium.MOD_ID);
     }
 }

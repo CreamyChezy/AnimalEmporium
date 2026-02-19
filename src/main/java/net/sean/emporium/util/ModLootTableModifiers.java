@@ -22,6 +22,8 @@ public class ModLootTableModifiers {
     private static final Identifier GRASS_ID = Identifier.of("minecraft","blocks/grass");
 
     public static void modifyLootTables() {
+        AnimalEmporium.LOGGER.info("Modifying Loot Tables for " + AnimalEmporium.MOD_ID);
+
         LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
             if(GRASS_ID.equals(registryKey.getValue())) {
                 LootPool.Builder poolBuilder = LootPool.builder()

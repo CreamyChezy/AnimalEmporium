@@ -23,14 +23,13 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.sean.emporium.entity.ModEntities;
-import net.sean.emporium.entity.ai.DismountParentGoal;
-import net.sean.emporium.entity.ai.EatFromBowlGoal;
-import net.sean.emporium.entity.ai.MountParentGoal;
-import net.sean.emporium.entity.ai.OpossumPanicGoal;
+import net.sean.emporium.entity.ai.animal.opossum.DismountParentGoal;
+import net.sean.emporium.entity.ai.animal.EatFromBowlGoal;
+import net.sean.emporium.entity.ai.animal.opossum.MountParentGoal;
+import net.sean.emporium.entity.ai.animal.TamedPanicGoal;
 import net.sean.emporium.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OpossumEntity extends TameableEntity {
@@ -174,7 +173,7 @@ public class OpossumEntity extends TameableEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new SitGoal(this));
-        this.goalSelector.add(2, new OpossumPanicGoal(this, 1.5D));
+        this.goalSelector.add(2, new TamedPanicGoal(this, 1.5D));
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.ofItems(ModItems.WORM_STICK), false));
         this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
@@ -242,15 +241,14 @@ public class OpossumEntity extends TameableEntity {
                 this.setTarget(null);
                 this.getEntityWorld().sendEntityStatus(this, (byte) 7);
                 this.setTamed(true,true);
-                return ActionResult.SUCCESS;
             } else {
                 for (int i = 0; i < 7; ++i) {
                     this.getEntityWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
                 }
-                return ActionResult.SUCCESS;
             }
+            return ActionResult.SUCCESS;
         }
-        if (this.isOwner(player) && (item != ModItems.WORM_STICK && item != ModItems.WORM)) {
+        else if (this.isOwner(player) && (item != ModItems.WORM_STICK && item != ModItems.WORM)) {
             this.setSitting(!this.isSitting());
             this.jumping = false;
             this.navigation.stop();
@@ -278,12 +276,11 @@ public class OpossumEntity extends TameableEntity {
         }
     }
 
-    // This method just doesn't work
     @Override
-    public void onDamaged(DamageSource damageSource) {
-        super.onDamaged(damageSource);
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        boolean damaged = super.damage(world, source, amount);
 
-        if (!this.getEntityWorld().isClient() && this.hasPassengers()) {
+        if (damaged && !world.isClient() && this.hasPassengers()) {
             List<Entity> passengers = this.getPassengerList();
 
             for (Entity passenger : passengers) {
@@ -291,11 +288,12 @@ public class OpossumEntity extends TameableEntity {
                     baby.stopRiding();
                     double xDir = (this.random.nextDouble() - 0.5) * 0.4;
                     double zDir = (this.random.nextDouble() - 0.5) * 0.4;
-                    baby.setVelocity(xDir, 0.3, zDir);
+                    baby.setVelocity(xDir, 0.1, zDir);
                     baby.velocityDirty = true;
                     baby.setMountCooldown(100);
                 }
             }
         }
+        return damaged;
     }
 }

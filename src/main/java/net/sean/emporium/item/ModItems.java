@@ -26,6 +26,8 @@ public class ModItems {
             ModFoodComponents.GOLDEN_WORM_EFFECT).registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, "golden_worm")))));
     public static final Item WORM_SOUP = registerItem("worm_soup", new WormSoupItem(new Item.Settings().food(ModFoodComponents.WORM_SOUP,
             ModFoodComponents.WORM_SOUP_EFFECT).registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, "worm_soup")))));
+    public static final Item CHEESE_SLICE = registerItem("cheese_slice", new Item(new Item.Settings().food(ModFoodComponents.CHEESE_SLICE)
+            .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, "cheese_slice")))));
 
     // FUNCTIONAL ITEMS
     public static final Item WORM_STICK = registerItem("worm_stick", new Item(new Item.Settings().maxCount(1).maxDamage(75)
@@ -42,6 +44,7 @@ public class ModItems {
         entries.add(WORM);
         entries.add(GOLDEN_WORM);
         entries.add(WORM_SOUP);
+        entries.add(CHEESE_SLICE);
     }
     private static void addItemsToToolsTab(FabricItemGroupEntries entries){
         entries.add(WORM_STICK);
@@ -60,7 +63,7 @@ public class ModItems {
         return Registry.register(Registries.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name), item);
     }
     public static void registerModItems() {
-        AnimalEmporium.LOGGER.info("Registering Mod Items for " + AnimalEmporium.MOD_ID);
+        AnimalEmporium.LOGGER.info("Registering ModItems for " + AnimalEmporium.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(ModItems::addItemsToFoodTab);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addItemsToToolsTab);

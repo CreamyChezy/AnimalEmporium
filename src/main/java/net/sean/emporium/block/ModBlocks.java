@@ -1,6 +1,5 @@
 package net.sean.emporium.block;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -36,8 +35,8 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, Identifier.of(AnimalEmporium.MOD_ID, name), block);
     }
 
-    private static Item registerBlockItem(String name, Block block){
-        return Registry.register(Registries.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name),
+    private static void registerBlockItem(String name, Block block){
+        Registry.register(Registries.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name),
                 new BlockItem(block, new Item.Settings().useBlockPrefixedTranslationKey()
                         .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, name)))));
     }

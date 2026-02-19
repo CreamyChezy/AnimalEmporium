@@ -86,6 +86,11 @@ public class ModRecipeProvider extends RecipeGenerator.RecipeProvider {
                         .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
                         .criterion(hasItem(Items.BOWL), conditionsFromItem(Items.BOWL))
                         .offerTo(exporter);
+                // CHEESE SLICE SHAPELESS
+                createShapeless(RecipeCategory.FOOD, ModItems.CHEESE_SLICE, 4)
+                        .input(Items.MILK_BUCKET)
+                        .criterion(hasItem(Items.MILK_BUCKET), conditionsFromItem(Items.MILK_BUCKET))
+                        .offerTo(exporter);
             }
         };
     }

@@ -1,7 +1,8 @@
-package net.sean.emporium.entity.ai;
+package net.sean.emporium.entity.ai.animal;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -9,14 +10,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.sean.emporium.block.ModBlocks;
 import net.sean.emporium.block.custom.PetBowlBlock;
-import net.sean.emporium.entity.custom.OpossumEntity;
 
 public class EatFromBowlGoal extends MoveToTargetPosGoal {
-    private final OpossumEntity opossum;
+    private final AnimalEntity entity;
 
-    public EatFromBowlGoal(OpossumEntity entity, double speed, int range) {
+    public EatFromBowlGoal(AnimalEntity entity, double speed, int range) {
         super(entity, speed, range);
-        this.opossum = entity;
+        this.entity = entity;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class EatFromBowlGoal extends MoveToTargetPosGoal {
 
     @Override
     public boolean canStart() {
-        if (this.opossum.hasVehicle() || this.opossum.getHealth() == this.opossum.getMaxHealth()) return false;
+        if (this.entity.hasVehicle() || this.entity.getHealth() >= this.entity.getMaxHealth()) return false;
         return super.canStart();
     }
 
@@ -36,13 +36,13 @@ public class EatFromBowlGoal extends MoveToTargetPosGoal {
         super.tick();
 
         if (this.hasReached()) {
-            World world = this.opossum.getEntityWorld();
+            World world = this.entity.getEntityWorld();
             BlockPos targetPos = this.targetPos;
             BlockState state = world.getBlockState(targetPos);
 
-            if (state.isOf(ModBlocks.PET_BOWL) && this.opossum.getHealth() < this.opossum.getMaxHealth()) {
+            if (state.isOf(ModBlocks.PET_BOWL) && this.entity.getHealth() < this.entity.getMaxHealth()) {
                 world.setBlockState(targetPos, state.with(PetBowlBlock.HAS_FOOD, false));
-                this.opossum.setHealth(this.opossum.getMaxHealth());
+                this.entity.setHealth(this.entity.getMaxHealth());
                 world.playSound(null, targetPos.getX(), targetPos.getY(), targetPos.getZ(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.MASTER, 1,1);
                 this.stop();
             }

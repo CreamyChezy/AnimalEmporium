@@ -2,7 +2,7 @@ package net.sean.emporium.entity.animation;
 
 import net.minecraft.client.render.entity.animation.*;
 
-public class ModAnimations {
+public class OpossumAnimations {
         public static final AnimationDefinition OPOSSUM_WALK = AnimationDefinition.Builder.create(0.0675F).looping()
                 .addBoneAnimation("tail", new Transformation(Transformation.Targets.ROTATE,
                         new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),

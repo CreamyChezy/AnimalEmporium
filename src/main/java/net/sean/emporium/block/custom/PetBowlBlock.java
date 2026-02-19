@@ -71,7 +71,7 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
             return onUse(state, world, pos, player, hit);
         }
         // Add worm to bowl
-        if (!hasFood && heldStack.getItem() == ModItems.WORM) {
+        else if (!hasFood && heldStack.getItem() == ModItems.WORM) {
 
             if (!player.getAbilities().creativeMode) {
                 heldStack.decrement(1);
@@ -100,21 +100,6 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
         }
         return ActionResult.PASS;
     }
-
-   /* @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, ModBlockEntities.PET_BOWL_BE,
-                ((world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1)));
-    }
-
-    */
-
-    @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        return super.onBreak(world, pos, state, player);
-    }
-
 
     @Nullable
     @Override

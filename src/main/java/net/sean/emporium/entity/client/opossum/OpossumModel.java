@@ -1,4 +1,4 @@
-package net.sean.emporium.entity.client;
+package net.sean.emporium.entity.client.opossum;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.animation.Animation;
@@ -7,9 +7,10 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.sean.emporium.AnimalEmporium;
-import net.sean.emporium.entity.animation.ModAnimations;
+import net.sean.emporium.entity.animation.OpossumAnimations;
+import net.sean.emporium.entity.client.EmporiumModel;
 
-public class OpossumModel extends EntityModel<OpossumRenderState> {
+public class OpossumModel extends EntityModel<OpossumRenderState> implements EmporiumModel {
     public static final EntityModelLayer OPOSSUM = new EntityModelLayer(Identifier.of(AnimalEmporium.MOD_ID,"opossum"),"main");
     private final ModelPart opossum;
     private final ModelPart head;
@@ -23,27 +24,28 @@ public class OpossumModel extends EntityModel<OpossumRenderState> {
        this.opossum = root;
        this.head = opossum.getChild("head");
 
-       this.walkingAnimation = ModAnimations.OPOSSUM_WALK.createAnimation(root);
+       this.walkingAnimation = OpossumAnimations.OPOSSUM_WALK.createAnimation(root);
     }
+
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -5.0F, -3.0F, 8.0F, 5.0F, 5.0F, new Dilation(0.0F)), pivotOnly(0.0F, 22.0F, 0.0F));
+        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -5.0F, -3.0F, 8.0F, 5.0F, 5.0F, new Dilation(0.0F)), EmporiumModel.pivot(0.0F, 22.0F, 0.0F));
 
-        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(21, 2).cuboid(-1.0F, 0.0F, -1.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 0.0F, -2.0F));
+        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(21, 2).cuboid(-1.0F, 0.0F, -1.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), EmporiumModel.pivot(4.0F, 0.0F, -2.0F));
 
-        ModelPartData bone2 = body.addChild("bone2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 0.0F, 1.0F));
+        ModelPartData bone2 = body.addChild("bone2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), EmporiumModel.pivot(4.0F, 0.0F, 1.0F));
 
         ModelPartData backlegleft = body.addChild("backlegleft", ModelPartBuilder.create().uv(6, 18).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F))
-                .uv(6, 21).cuboid(-1.0F, 1.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), pivotOnly(-3.0F, 0.0F, -2.0F));
+                .uv(6, 21).cuboid(-1.0F, 1.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), EmporiumModel.pivot(-3.0F, 0.0F, -2.0F));
 
         ModelPartData backlegright = body.addChild("backlegright", ModelPartBuilder.create().uv(0, 3).cuboid(-1.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(17, 16).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), pivotOnly(-3.0F, 0.0F, 1.0F));
+                .uv(17, 16).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), EmporiumModel.pivot(-3.0F, 0.0F, 1.0F));
 
         ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 10).cuboid(0.0F, -2.0F, -1.0F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F))
                 .uv(12, 19).cuboid(1.0F, -3.0F, -2.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(0, 19).cuboid(1.0F, -3.0F, 1.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
-                .uv(19, 10).cuboid(3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), pivotOnly(4.0F, 20.0F, -1.0F));
+                .uv(19, 10).cuboid(3.0F, -1.0F, 0.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), EmporiumModel.pivot(4.0F, 20.0F, -1.0F));
 
         ModelPartData muzzelr_r1 = head.addChild("muzzelr_r1", ModelPartBuilder.create().uv(0, 16).cuboid(5.5835F, -3.0F, 1.7064F, 3.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-4.0F, 2.0F, 1.0F, 0.0F, 0.3054F, 0.0F));
 
@@ -54,7 +56,7 @@ public class OpossumModel extends EntityModel<OpossumRenderState> {
         ModelPartData tail = modelPartData.addChild("tail", ModelPartBuilder.create().uv(16, 19).cuboid(-3.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(21, 0).cuboid(-2.0F, 0.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(9, 10).cuboid(-6.0F, 2.0F, 0.0F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(19, 14).cuboid(-7.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F)), pivotOnly(-4.0F, 19.0F, -1.0F));
+                .uv(19, 14).cuboid(-7.0F, 1.0F, 0.0F, 2.0F, 1.0F, 1.0F, new Dilation(0.0F)), EmporiumModel.pivot(-4.0F, 19.0F, -1.0F));
         return TexturedModelData.of(modelData, 32, 32);
     }
 
@@ -73,9 +75,4 @@ public class OpossumModel extends EntityModel<OpossumRenderState> {
         this.head.yaw = headYaw * 0.017453292F;
         this.head.pitch = headPitch * 0.017453292F;
     }
-
-    public static ModelTransform pivotOnly(float x, float y, float z) {
-        return new ModelTransform(x, y, z, 0f, 0f, 0f,1f,1f,1f);
-    }
-
 }
