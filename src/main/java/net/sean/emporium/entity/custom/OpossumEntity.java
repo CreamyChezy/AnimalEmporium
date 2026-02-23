@@ -61,8 +61,9 @@ public class OpossumEntity extends TameableEntity {
         return this.mountCooldown;
     }
 
+    @Nullable
     @Override
-    public @Nullable EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData) {
         entityData = super.initialize(world, difficulty, spawnReason, entityData);
 
         if(spawnReason == SpawnReason.NATURAL || spawnReason == SpawnReason.SPAWN_ITEM_USE || spawnReason == SpawnReason.CHUNK_GENERATION) {
@@ -231,9 +232,7 @@ public class OpossumEntity extends TameableEntity {
         Item item = itemStack.getItem();
 
         if (!this.isTamed() && item == ModItems.WORM_STICK) {
-            if (!player.getAbilities().creativeMode) {
-                player.getStackInHand(hand).damage(1, player);
-            }
+            if (!player.getAbilities().creativeMode) player.getStackInHand(hand).damage(1, player);
             if (this.random.nextInt(6) == 0) {
                 this.setOwner(player);
                 this.navigation.stop();
@@ -253,10 +252,9 @@ public class OpossumEntity extends TameableEntity {
             this.jumping = false;
             this.navigation.stop();
             this.setTarget(null);
-                return ActionResult.SUCCESS;
-        } else {
-                return ActionResult.PASS;
-            }
+            return ActionResult.SUCCESS;
+        }
+        else return super.interactMob(player, hand);
     }
 
     @Override

@@ -8,11 +8,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.entity.custom.RatEntity;
+import net.sean.emporium.entity.custom.RatVariants;
 
 public class RatRenderer extends MobEntityRenderer<RatEntity, RatRenderState, RatModel> {
 
     public RatRenderer(EntityRendererFactory.Context context) {
-        super(context, new RatModel(context.getPart(RatModel.RAT)), 0.2f);
+        super(context, new RatModel(context.getPart(RatModel.RAT)), 0.5f);
     }
 
     @Override
@@ -28,7 +29,14 @@ public class RatRenderer extends MobEntityRenderer<RatEntity, RatRenderState, Ra
     @Override
     public void updateRenderState(RatEntity entity, RatRenderState state, float f) {
         super.updateRenderState(entity, state, f);
-        state.variant = entity.getVariant();
+        String name = entity.getStringifiedName().toLowerCase();
+        switch (name) {
+            case "sam", "dean", "leo" -> state.variant = RatVariants.GRAY;
+            case "chezburger" -> state.variant = RatVariants.NAKED;
+            case "bloxy cola", "bloxy-cola" -> state.variant = RatVariants.BLACK;
+            case "honey" -> state.variant = RatVariants.GOLDEN;
+            default -> state.variant = entity.getVariant();
+        }
     }
 
     @Override

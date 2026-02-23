@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.sean.emporium.block.entity.ModBlockEntities;
 import net.sean.emporium.block.entity.PetBowlBlockEntity;
 import net.sean.emporium.item.ModItems;
 import org.jetbrains.annotations.Nullable;
@@ -67,12 +66,11 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
         boolean hasFood = state.get(HAS_FOOD);
 
         // Runs onUse() if hasFood = true no matter what
-        if (hasFood){
+        if (hasFood) {
             return onUse(state, world, pos, player, hit);
         }
         // Add worm to bowl
-        else if (!hasFood && heldStack.getItem() == ModItems.WORM) {
-
+        else if (heldStack.getItem() == ModItems.WORM) {
             if (!player.getAbilities().creativeMode) {
                 heldStack.decrement(1);
             }
@@ -104,7 +102,7 @@ public class PetBowlBlock extends BlockWithEntity implements BlockEntityProvider
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (world.isClient()) return null; // client-only tick, optional
+        if (world.isClient()) return null;
         return (world1, pos, state1, blockEntity) -> {
             if (blockEntity instanceof PetBowlBlockEntity bowl) {
                 bowl.tick(world1, pos, state1);

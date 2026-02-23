@@ -17,10 +17,12 @@
   "item.emporium.opossum_spawn_egg": "Opossum Spawn Egg",
   "item.emporium.golden_worm": "Golden Worm",
   "item.emporium.worm_soup": "Worm Soup",
+  "item.emporium.cheese_slice": "Cheese Slice",
+  "item.emporium.rat_spawn_egg": "Rat Spawn Egg",
 
   "block.emporium.worm_block": "Block of Worms",
   "block.emporium.pet_bowl": "Pet Bowl",
 
   "entity.emporium.opossum": "Opossum",
-  "entity.emporium.cube": "Cube"
+  "entity.emporium.rat": "Rat"
 }

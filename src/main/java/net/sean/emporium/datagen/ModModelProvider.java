@@ -30,6 +30,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.GOLDEN_WORM, Models.GENERATED);
         itemModelGenerator.register(ModItems.WORM_SOUP, Models.GENERATED);
         itemModelGenerator.register(ModItems.CHEESE_SLICE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAT_SPAWN_EGG, Models.GENERATED);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ModEntities {
     public static final EntityType<RatEntity> RAT = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(AnimalEmporium.MOD_ID, "rat"),
             EntityType.Builder.create(RatEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.1f,0.1f).build(RAT_KEY));
+                    .dimensions(0.5f,0.5f).build(RAT_KEY));
 
     public static void registerModEntities() {
         AnimalEmporium.LOGGER.info("Registering ModEntities for " + AnimalEmporium.MOD_ID);

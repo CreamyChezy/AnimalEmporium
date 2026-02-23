@@ -38,8 +38,12 @@ public class AnimalEmporium implements ModInitializer {
 	/*
 	TODO
 		- fix and add more animations
-		- somehow fix stupid shadow/hitbox offset
-		- implement new inventory texture
+		- somehow fix stupid shadow/hitbox offset on opossum
+		- implement new inventory texture?
+		- get rat model and textures
+		- get cheese texture
+		- better worm block texture?
+		- rat needs model for when on shoulder, tweak the cooldown for getting on shoulder?
 	*/
 
 

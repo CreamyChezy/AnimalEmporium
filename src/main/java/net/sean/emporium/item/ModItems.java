@@ -39,6 +39,9 @@ public class ModItems {
     public static final Item OPOSSUM_SPAWN_EGG = registerItem("opossum_spawn_egg",
             new SpawnEggItem(new Item.Settings().spawnEgg(ModEntities.OPOSSUM)
                     .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, "opossum_spawn_egg")))));
+    public static final Item RAT_SPAWN_EGG = registerItem("rat_spawn_egg",
+            new SpawnEggItem(new Item.Settings().spawnEgg(ModEntities.RAT)
+                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(AnimalEmporium.MOD_ID, "rat_spawn_egg")))));
 
     private static void addItemsToFoodTab(FabricItemGroupEntries entries){
         entries.add(WORM);
@@ -52,6 +55,7 @@ public class ModItems {
     }
     private static void addItemsToSpawnEggsTab(FabricItemGroupEntries entries){
         entries.add(OPOSSUM_SPAWN_EGG);
+        entries.add(RAT_SPAWN_EGG);
     }
     private static void addItemsToBuildingBlocksTab(FabricItemGroupEntries entries){
         entries.add(ModBlocks.WORM_BLOCK);

@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -24,6 +25,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.sean.emporium.entity.ModEntities;
+import net.sean.emporium.entity.ai.animal.TamedPanicGoal;
 import net.sean.emporium.item.ModItems;
 import org.jspecify.annotations.Nullable;
 
@@ -65,13 +67,15 @@ public class RatEntity extends TameableShoulderEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new SitGoal(this));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.0D, Ingredient.ofItems(ModItems.CHEESE_SLICE), false));
-        this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.add(5, new FollowParentGoal(this, 1.0D));
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(2, new TamedPanicGoal(this, 1.5D));
+        this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(4, new TemptGoal(this, 1.0D, Ingredient.ofItems(ModItems.CHEESE_SLICE), false));
+        this.goalSelector.add(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.add(6, new SitOnOwnerShoulderGoal(this));
+        this.goalSelector.add(7, new FollowParentGoal(this, 1.0D));
+        this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(9, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(9, new LookAroundGoal(this));
     }
 
     public static DefaultAttributeContainer.Builder createRatAttributes() {
@@ -125,16 +129,14 @@ public class RatEntity extends TameableShoulderEntity {
             }
             return ActionResult.SUCCESS;
         }
-        // test whether 'else if' here instead of 'if' is safer or maybe messes something up. same logic found in OpossumEntity
         else if (this.isOwner(player) && item != ModItems.CHEESE_SLICE) {
             this.setSitting(!this.isSitting());
             this.jumping = false;
             this.navigation.stop();
             this.setTarget(null);
             return ActionResult.SUCCESS;
-        } else {
-            return ActionResult.PASS;
         }
+        else return super.interactMob(player, hand);
     }
 
     @Override
