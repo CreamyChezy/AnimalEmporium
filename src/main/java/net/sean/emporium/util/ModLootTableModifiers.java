@@ -12,7 +12,7 @@ import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.item.ModItems;
 
 public class ModLootTableModifiers {
-    private static final Identifier GRASS_ID = Identifier.of("minecraft","blocks/grass");
+    private static final Identifier GRASS_ID = Identifier.of("minecraft","blocks/short_grass");
 
     public static void modifyLootTables() {
         AnimalEmporium.LOGGER.info("Modifying Loot Tables for " + AnimalEmporium.MOD_ID);
