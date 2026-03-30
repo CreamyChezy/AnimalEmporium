@@ -15,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -48,6 +47,7 @@ public class RatEntity extends TameableShoulderEntity {
             --this.idleAnimationTimeout;
         }
     }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(ModItems.CHEESE_SLICE);
@@ -57,8 +57,10 @@ public class RatEntity extends TameableShoulderEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         RatEntity baby = ModEntities.RAT.create(world, SpawnReason.BREEDING);
-        if (baby != null && entity instanceof RatEntity parent) {
-            baby.setVariant(this.random.nextBoolean() ? this.getVariant() : parent.getVariant());
+
+        if (baby != null && entity instanceof RatEntity parent2) {
+            baby.setVariant(this.random.nextBoolean() ? this.getVariant() : parent2.getVariant());
+            if (this.isTamed()) baby.setOwner(this.getOwnerReference());
         }
         return baby;
     }

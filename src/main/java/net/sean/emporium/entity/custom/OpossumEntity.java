@@ -16,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -69,9 +71,9 @@ public class OpossumEntity extends TameableEntity {
         if(spawnReason == SpawnReason.NATURAL || spawnReason == SpawnReason.SPAWN_ITEM_USE || spawnReason == SpawnReason.CHUNK_GENERATION) {
             float rand = world.getRandom().nextFloat();
             // Creates 1-3 passenger babies based on rand value
-            if(rand < 0.4f) {
+            if (rand < 0.4f) {
                 this.spawnRider(world);
-                if(rand < 0.2f) {
+                if (rand < 0.2f) {
                     this.spawnRider(world);
                     if (rand < 0.1f) {
                         this.spawnRider(world);
@@ -198,7 +200,16 @@ public class OpossumEntity extends TameableEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.OPOSSUM.create(world, SpawnReason.BREEDING);
+        OpossumEntity baby = ModEntities.OPOSSUM.create(world, SpawnReason.BREEDING);
+
+        // TODO test if owner is randomized, otherwise add logic to here and rat
+        if (baby != null && entity instanceof OpossumEntity) {
+            if (this.isTamed()) {
+                baby.setOwner(this.getOwnerReference());
+                baby.setTamed(true, true);
+            }
+        }
+        return baby;
     }
 
     @Override
@@ -231,8 +242,8 @@ public class OpossumEntity extends TameableEntity {
         ItemStack itemStack = player.getStackInHand(hand);
         Item item = itemStack.getItem();
 
-        if (!this.isTamed() && item == ModItems.WORM_STICK) {
-            if (!player.getAbilities().creativeMode) player.getStackInHand(hand).damage(1, player);
+        if (!this.isTamed() && item == ModItems.WORM) {
+            if (!player.getAbilities().creativeMode) player.getStackInHand(hand).decrement(1);
             if (this.random.nextInt(6) == 0) {
                 this.setOwner(player);
                 this.navigation.stop();
@@ -294,4 +305,17 @@ public class OpossumEntity extends TameableEntity {
         }
         return damaged;
     }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_FOX_DEATH;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_FOX_HURT;
+    }
+
 }

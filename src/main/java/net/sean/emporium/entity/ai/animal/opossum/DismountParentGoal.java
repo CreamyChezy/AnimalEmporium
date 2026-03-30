@@ -17,7 +17,7 @@ public class DismountParentGoal extends Goal {
     @Override
     public boolean canStart() {
         if (!this.baby.isBaby() || !this.baby.hasVehicle()) return false;
-        if (this.baby.getRandom().nextInt(1200) != 0) return false;
+        if (this.baby.getRandom().nextInt(1800) != 0) return false;
 
         Entity vehicle = baby.getVehicle();
         return vehicle instanceof OpossumEntity;
@@ -33,6 +33,6 @@ public class DismountParentGoal extends Goal {
         );
 
         this.baby.velocityDirty = true;
-        this.baby.setMountCooldown(60);
+        this.baby.setMountCooldown(800);
     }
 }

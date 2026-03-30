@@ -1,18 +1,13 @@
 package net.sean.emporium.potion;
 
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.Potions;
-import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.sean.emporium.AnimalEmporium;
-import net.sean.emporium.item.ModItems;
 
 public class ModPotions {
     public static final RegistryEntry<Potion> HASTE_POTION = register("haste_potion",

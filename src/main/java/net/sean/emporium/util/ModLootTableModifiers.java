@@ -1,22 +1,15 @@
 package net.sean.emporium.util;
 
-import io.netty.util.Constant;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
 import net.sean.emporium.AnimalEmporium;
 import net.sean.emporium.item.ModItems;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ModLootTableModifiers {
     private static final Identifier GRASS_ID = Identifier.of("minecraft","blocks/grass");

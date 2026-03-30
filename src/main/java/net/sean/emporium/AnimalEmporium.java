@@ -39,7 +39,7 @@ public class AnimalEmporium implements ModInitializer {
 	TODO
 		- fix and add more animations
 		- somehow fix stupid shadow/hitbox offset on opossum
-		- implement new inventory texture?
+		- maybe make worm on a stick used to make opossum play or something
 		- get rat model and textures
 		- get cheese texture
 		- better worm block texture?

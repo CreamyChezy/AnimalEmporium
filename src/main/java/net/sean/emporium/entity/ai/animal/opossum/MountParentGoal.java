@@ -20,7 +20,7 @@ public class MountParentGoal extends Goal {
     @Override
     public boolean canStart() {
         if (!this.baby.isBaby() || this.baby.hasVehicle() || this.baby.getMountCooldown() > 0) return false;
-        if (this.baby.getRandom().nextInt(1200) != 0) return false;
+        if (this.baby.getRandom().nextInt(100) != 0) return false;
 
         List<OpossumEntity> list = this.baby.getEntityWorld().getEntitiesByClass(OpossumEntity.class,
                 this.baby.getBoundingBox().expand(3.0D),
